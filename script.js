@@ -14,48 +14,37 @@
     }
   });
 
-// Observer exclusivo para la galería con animación suave
-const galleryObserver = new IntersectionObserver(entries => {
-  entries.forEach((entry, index) => {
-    if (entry.isIntersecting) {
-      // Añade un delay para que no entren todas juntas
-      setTimeout(() => {
-        entry.target.classList.add('show');
-      }, index * 150); // 150ms entre cada imagen
-
-      galleryObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.15 });
-
-document.querySelectorAll('.animate-img').forEach(img => {
-  galleryObserver.observe(img);
-});
-
-//ANIMACIOS AL HACER SCROLL EN CARRUSEL + INTRO//
-    const observers = document.querySelectorAll('.fade-up, .fade-side');
-
-    const options = {
-      threshold: 0.2
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+document.addEventListener('DOMContentLoaded', () => {
+  // IntersectionObserver para galerías y elementos hidden
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        // Diferencia entre animate-img y scroll-photo
+        if (entry.target.classList.contains('animate-img')) {
+          // Primera galería: usa .show
+          setTimeout(() => entry.target.classList.add('show'), index * 150);
+        } else if (entry.target.classList.contains('scroll-photo')) {
+          // Segunda galería: usa .visible
+          setTimeout(() => entry.target.classList.add('visible'), index * 150);
+        } else if (entry.target.classList.contains('hidden')) {
+          // Elementos hidden: también usan .show
+          entry.target.classList.add('show');
         }
-      });
-    }, options);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
 
-    observers.forEach(el => observer.observe(el));
+  // Seleccionamos todos los elementos a animar
+  const galleryImgs = document.querySelectorAll('.animate-img, .scroll-photo');
+  const hiddenEls = document.querySelectorAll('.hidden');
+
+  galleryImgs.forEach(el => revealObserver.observe(el));
+  hiddenEls.forEach(el => revealObserver.observe(el));
+});
 
     
-//GALERÍA RANDOM SCROLL // 
-document.addEventListener("scroll", () => {
-  document.querySelectorAll(".gallery-random .photo").forEach((el) => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      el.classList.add("visible");
-    }
-  });
-});
+
+
+
+
