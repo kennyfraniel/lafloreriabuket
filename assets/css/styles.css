@@ -281,67 +281,243 @@ body {
 
 
 
-/* ===== Nueva galería ===== */
-.photo-gallery {
-  padding: 4rem 2rem;
-  background: #212f33; /* tono oscuro distinto */
+/* ===== Nueva galería (centrada y fluida) ===== */
+.photo-gallery{
+  /* centra el contenido con “contenedor fluido” */
+  padding: 4rem max(2rem, calc((100vw - 1400px) / 2));
+  background:#212f33;
 }
 
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
+.photo-grid{
+  display:grid;
+  /* auto-fit evita columnas fantasma; 1fr permite llenar el ancho */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap:1.5rem;
+
+  /* centra la malla si sobra espacio por cómo calculamos el padding */
+  justify-items: center;  /* las tarjetas quedan centradas en su columna */
 }
 
-.photo-grid img {
-  width: 100%;
-  height: auto;
-  border-radius: 14px;
-  object-fit: cover;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  transform: scale(0.9) translateY(50px);
-  transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
-  cursor: pointer;
+.photo-grid img{
+  width:100%;
+  height:auto;
+  display:block;          /* evita espacios inline raros */
+  border-radius:14px;
+  object-fit:cover;
+  box-shadow:0 6px 15px rgba(0,0,0,.2);
+  opacity:0;
+  transform:scale(.9) translateY(50px);
+  transition:all .9s cubic-bezier(.25,1,.5,1);
+  cursor:pointer;
 }
 
-/* Cuando entra en vista */
-.photo-grid img.visible {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
+.photo-grid img.visible{ opacity:1; transform:scale(1) translateY(0); }
 
-/* Hover con efecto sutil y distinto */
-.photo-grid img:hover {
-  transform: scale(1.12) rotate(1deg);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+.photo-grid img:hover{
+  transform:scale(1.12) rotate(1deg);
+  box-shadow:0 12px 30px rgba(0,0,0,.35);
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .photo-gallery {
-    padding: 2rem 1.5rem;
-  }
-  .photo-grid {
-    gap: 1rem;
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .photo-grid img {
-    border-radius: 10px;
-  }
+@media (max-width: 768px){
+  .photo-gallery{ padding: 2rem 1.5rem; }
+  .photo-grid{ gap:1rem; grid-template-columns: repeat(2, 1fr); }
+  .photo-grid img{ border-radius:10px; }
+}
+@media (max-width:480px){
+  .photo-gallery{ padding:1.5rem 1rem; }
+  .photo-grid{ grid-template-columns:1fr; gap:.8rem; }
+  .photo-grid img{ border-radius:8px; }
 }
 
-@media (max-width: 480px) {
-  .photo-gallery {
-    padding: 1.5rem 1rem;
-  }
-  .photo-grid {
-    grid-template-columns: 1fr; /* 1 columna en móviles muy chicos */
-    gap: 0.8rem;
-  }
-  .photo-grid img {
-    border-radius: 8px;
-  }
+
+
+
+
+/*UBICACIÓN + MAPS */
+/* ===== Sección Ubicación ===== */
+.location{
+  background:#1b1b1b; color:#f5f5f5;
+  padding:4rem 2rem;
+}
+.location-wrap{
+  max-width:1100px; margin-inline:auto;
+}
+.location-head{ text-align:center; margin-bottom:1.5rem; }
+.location-title{
+  font-family: 'Playfair Display', serif;
+  font-size:2.2rem; margin:0 0 .75rem;
+  color:var(--brand, #e2a3b6); font-weight:700; letter-spacing:.5px;
+}
+.location-description{
+  font-size:1.1rem; line-height:1.7; max-width:780px; margin:0 auto;
+  opacity:0; transform:translateY(12px);
+  animation:fadeInUp .8s ease .1s forwards;
 }
 
+/* Tarjeta de mapa responsive con aspect-ratio */
+.map-card{
+  background:#213138; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,.25);
+  overflow:hidden; margin:1.5rem auto 1rem; max-width:900px;
+  aspect-ratio:16 / 9;  /* se adapta y mantiene proporción */
+}
+.gmap{ width:100%; height:100%; border:0; display:block; }
+
+/* Acciones */
+.map-actions{
+  display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap;
+}
+.btn-map{
+  display:inline-block; padding:.8rem 1.1rem; border-radius:999px;
+  background:var(--brand, #e2a3b6); color:#1c2b2d; text-decoration:none; font-weight:600;
+  box-shadow:0 6px 16px rgba(0,0,0,.25);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn-map:hover{ transform:translateY(-1px); box-shadow:0 10px 24px rgba(0,0,0,.28); }
+.btn-map.outline{
+  background:transparent; color:#f5f5f5; border:2px solid rgba(255,255,255,.25);
+}
+
+/* Mobile: mapa un poco más cuadrado */
+@media (max-width: 768px){
+  .location{ padding:3rem 1.25rem; }
+  .location-title{ font-size:1.9rem; }
+  .location-description{ font-size:1rem; padding:0 .25rem; }
+  .map-card{ aspect-ratio: 4 / 3; } /* se ve más grande en vertical */
+}
+
+@keyframes fadeInUp{
+  from{ opacity:0; transform:translateY(12px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+
+/* ===== Contacto Moderno ===== */
+:root{
+  /* ajustá si querés otros tonos de acento */
+  --brand: var(--brand, #e2a3b6);
+  --accent-2: #8dd3c7;
+}
+
+.contact-modern{
+  position: relative;
+  isolation: isolate;
+  background: #1b272a; /* combina con tu paleta oscura */
+  padding: clamp(3rem, 5vw, 5rem) 0;
+  color: #f5f6f8;
+  overflow: hidden;
+}
+
+/* blobs/gradientes sutiles de fondo */
+.contact-bg::before,
+.contact-bg::after{
+  content:""; position:absolute; inset:auto; filter: blur(60px); opacity:.35; pointer-events:none;
+}
+.contact-bg::before{
+  top:-80px; left:-120px; width:380px; height:380px; border-radius:50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--brand) 70%, white), transparent 70%);
+}
+.contact-bg::after{
+  right:-120px; bottom:-80px; width:420px; height:420px; border-radius:50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent-2) 70%, white), transparent 70%);
+}
+
+.contact-container{ width:min(1100px, 92%); margin-inline:auto; }
+
+.contact-header{ text-align:center; margin-bottom: clamp(1.5rem, 3vw, 2rem); }
+.contact-title{
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.9rem, 2.6vw, 2.4rem);
+  letter-spacing:.4px; margin:0 0 .4rem;
+  display:inline-block; position:relative;
+}
+.contact-title::after{
+  content:""; position:absolute; left:0; bottom:-6px; height:3px; width:0;
+  background: linear-gradient(90deg, var(--brand), transparent);
+  border-radius:2px; transition: width .8s ease .15s;
+}
+.contact-header.is-inview .contact-title::after{ width:100%; }
+
+.contact-subtitle{
+  margin: .4rem auto 0; max-width: 48ch;
+  opacity:.92; line-height:1.7;
+}
+
+/* grid de dos tarjetas (cta + video) */
+.contact-grid{
+  display:grid; gap: clamp(1rem, 2.5vw, 1.5rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 900px){
+  .contact-grid{ grid-template-columns: 1fr; }
+}
+
+/* tarjeta glass */
+.contact-card{
+  background: color-mix(in srgb, #223238 60%, transparent);
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 20px 50px rgba(0,0,0,.35);
+  border-radius: 22px;
+  padding: clamp(1.1rem, 2.2vw, 1.6rem);
+  backdrop-filter: blur(10px);
+  transform: translateY(8px);
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.contact-card:hover{
+  transform: translateY(0);
+  box-shadow: 0 28px 60px rgba(0,0,0,.38);
+  border-color: rgba(255,255,255,.14);
+}
+
+.card-title{ margin: 0 0 .4rem; font-size: 1.2rem; letter-spacing:.3px; }
+.card-text{ margin: 0 0 1rem; opacity:.9; }
+
+/* Botones CTA modernos */
+.cta-buttons{ display:flex; gap:.75rem; flex-wrap:wrap; margin-bottom:.6rem; }
+.btn-cta{
+  display:inline-flex; align-items:center; gap:.55rem;
+  padding:.85rem 1.15rem; border-radius: 999px;
+  font-weight: 700; font-size:.98rem; text-decoration:none; color:#121516;
+  transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+  box-shadow: 0 8px 22px rgba(0,0,0,.25);
+}
+.btn-cta:hover{ transform: translateY(-2px); box-shadow: 0 14px 26px rgba(0,0,0,.28); }
+.btn-cta:focus-visible{
+  outline: 3px solid color-mix(in srgb, var(--brand) 70%, white);
+  outline-offset: 3px;
+}
+
+/* estilos específicos */
+.btn-wa{
+  background: linear-gradient(135deg, #25D366, #58ec93);
+  color:#0b1a10;
+}
+.btn-ig{
+  background: linear-gradient(135deg, #F58529, #DD2A7B 40%, #8134AF 70%, #515BD4);
+  color:#fff;
+}
+
+/* Video card */
+.contact-video .video-frame{
+  border-radius: 18px; overflow:hidden;
+  aspect-ratio: 16 / 9; background:#0f171a;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.contact-video iframe{
+  width:100%; height:100%; border:0; display:block;
+}
+.video-caption{
+  margin:.75rem 0 0; font-size:.95rem; opacity:.85;
+}
+
+/* Animaciones reveal (si ya usás tu IO unificado) */
+.reveal{ opacity:0; transform: translateY(14px) scale(.98); filter: blur(2px);
+  transition: opacity .6s ease, transform .6s ease, filter .6s ease; transition-delay: var(--d, 0s);
+}
+.reveal.is-inview{ opacity:1; transform: none; filter:none; }
+
+/* Respeto a reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .contact-card, .reveal, .contact-title::after { transition:none !important; }
+}
 
