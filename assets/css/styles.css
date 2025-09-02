@@ -521,3 +521,29 @@ body {
   .contact-card, .reveal, .contact-title::after { transition:none !important; }
 }
 
+
+
+/* Guardas anti-overflow en mobile */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;   /* 🔧 oculta cualquier desborde lateral */
+}
+
+/* Medios embebidos e imágenes nunca deben exceder el ancho */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Evitá usar 100vw (causa desbordes con scrollbars y safe-areas) */
+section, .hero, .intro, .photo-gallery, .location, .contact-modern {
+  width: 100%; /* en vez de 100vw */
+}
+
+/* Si tu H1 gigante o el hero usan transform/posiciones raras, escondé rebalses */
+.hero, .intro { overflow: hidden; }
