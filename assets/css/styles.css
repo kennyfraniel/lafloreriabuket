@@ -107,6 +107,43 @@ body {
   }
 }
 
+/* Tablets y pantallas medianas (hasta 1024px) */
+@media (max-width: 1024px) {
+  .intro-content h1 {
+    font-size: 7rem;
+  }
+  .intro-content h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Celulares grandes (hasta 768px) */
+@media (max-width: 768px) {
+  .intro-content h1 {
+    font-size: 7rem;
+  }
+  .intro-content h2 {
+    font-size: 2.6rem;
+  }
+  .scroll-down-indicator {
+    font-size: 2rem;
+  }
+}
+
+/* Celulares chicos (hasta 480px) */
+@media (max-width: 480px) {
+  .intro-content h1 {
+    font-size: 4rem;
+  }
+  .intro-content h2 {
+    font-size: 1.8rem;
+  }
+  .scroll-down-indicator {
+    font-size: 1.6rem;
+  }
+}
+
+
 
 
 
@@ -283,52 +320,62 @@ body {
 
 /* ===== Nueva galería (centrada y fluida) ===== */
 .photo-gallery{
-  /* centra el contenido con “contenedor fluido” */
-  padding: 4rem max(2rem, calc((100vw - 1400px) / 2));
+  padding: 4rem max(2rem, calc((100% - 1400px) / 2)); /* usa 100% para evitar overflow */
   background:#212f33;
 }
 
 .photo-grid{
   display:grid;
-  /* auto-fit evita columnas fantasma; 1fr permite llenar el ancho */
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap:1.5rem;
-
-  /* centra la malla si sobra espacio por cómo calculamos el padding */
-  justify-items: center;  /* las tarjetas quedan centradas en su columna */
+  justify-items: center;
 }
 
+/* Tarjetas más uniformes: evita que una vertical se haga eterna */
 .photo-grid img{
   width:100%;
-  height:auto;
-  display:block;          /* evita espacios inline raros */
+  aspect-ratio: 3 / 4;       /* 👈 altura controlada (ajustá 4/5 o 1/1 si preferís) */
+  object-fit: cover;
+  display:block;
   border-radius:14px;
-  object-fit:cover;
   box-shadow:0 6px 15px rgba(0,0,0,.2);
   opacity:0;
   transform:scale(.9) translateY(50px);
   transition:all .9s cubic-bezier(.25,1,.5,1);
   cursor:pointer;
 }
-
 .photo-grid img.visible{ opacity:1; transform:scale(1) translateY(0); }
-
-.photo-grid img:hover{
-  transform:scale(1.12) rotate(1deg);
-  box-shadow:0 12px 30px rgba(0,0,0,.35);
-}
+.photo-grid img:hover{ transform:scale(1.12) rotate(1deg); box-shadow:0 12px 30px rgba(0,0,0,.35); }
 
 /* Responsive */
 @media (max-width: 768px){
-  .photo-gallery{ padding: 2rem 1.5rem; }
-  .photo-grid{ gap:1rem; grid-template-columns: repeat(2, 1fr); }
+  .photo-gallery{ padding: 2rem 1.25rem; }
+  .photo-grid{
+    gap:1rem;
+    /* Fuerza 2 columnas en tablet/móvil grande */
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 👈 sin mínimo para que entren 2 */
+  }
   .photo-grid img{ border-radius:10px; }
 }
-@media (max-width:480px){
+
+/* Celulares typical (≤480px): 2 columnas compactas */
+@media (max-width: 480px){
   .photo-gallery{ padding:1.5rem 1rem; }
-  .photo-grid{ grid-template-columns:1fr; gap:.8rem; }
-  .photo-grid img{ border-radius:8px; }
+  .photo-grid{
+    gap:.8rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 👈 mantiene 2 columnas */
+  }
+  .photo-grid img{
+    aspect-ratio: 4 / 5;   /* 👈 un toque más bajitas en celu */
+    border-radius:8px;
+  }
 }
+
+/* Extra opcional: si el dispositivo es MUY chico (≤360px), ahí sí 1 columna */
+@media (max-width: 360px){
+  .photo-grid{ grid-template-columns: 1fr; }
+}
+
 
 
 
