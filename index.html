@@ -7,6 +7,7 @@
 
   <title>BUKET Florería</title>
   <link rel="stylesheet" href="/lafloreriabuket/assets/css/styles.css" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <!-- AOS CSS -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
@@ -35,6 +36,16 @@
     <img src="/lafloreriabuket/assets/img/ramo4.jpg" alt="Ramo clásico" class="animate-img" data-animate="fade-up" />
     <img src="/lafloreriabuket/assets/img/ramo3.jpg" alt="Ramo moderno" class="animate-img" data-animate="fade-up" />
     <img src="/lafloreriabuket/assets/img/ramo7.jpg" alt="Ramo lindo" class="animate-img" data-animate="fade-up" />
+  </div>
+</section>
+
+<!-- Imágenes adicionales de ramos -->
+<section class="gallery" id="gallery-section-2">
+  <div class="gallery-grid">
+    <img src="/lafloreriabuket/assets/img/ramo-1.jpg" alt="Ramo silvestre" class="animate-img" data-animate="fade-up" />
+    <img src="/lafloreriabuket/assets/img/ramo-2.jpg" alt="Ramo romántico" class="animate-img" data-animate="fade-up" />
+    <img src="/lafloreriabuket/assets/img/ramo-3.jpg" alt="Ramo tropical" class="animate-img" data-animate="fade-up" />
+    <img src="/lafloreriabuket/assets/img/ramo-4.jpg" alt="Ramo minimalista" class="animate-img" data-animate="fade-up" />
   </div>
 </section>
 
@@ -110,6 +121,61 @@
 </section>
 
 
+<!-- Carrusel de fotos -->
+<section class="carousel" id="carousel-ramos" aria-label="Carrusel de ramos">
+  <div class="carousel-viewport">
+    <div class="carousel-track">
+      <div class="carousel-slide">
+        <img src="/lafloreriabuket/assets/img/carru1.jpg" alt="Ramo bohemio con tonos cálidos" loading="lazy" decoding="async">
+      </div>
+      <div class="carousel-slide">
+        <img src="/lafloreriabuket/assets/img/carru2.jpg" alt="Ramo campestre con follaje verde" loading="lazy" decoding="async">
+      </div>
+      <div class="carousel-slide">
+        <img src="/lafloreriabuket/assets/img/carru3.jpg" alt="Ramo romántico con rosas rosadas" loading="lazy" decoding="async">
+      </div>
+      <div class="carousel-slide">
+        <img src="/lafloreriabuket/assets/img/carru4.jpg" alt="Ramo tropical con flores exóticas" loading="lazy" decoding="async">
+      </div>
+       <div class="carousel-slide">
+        <img src="/lafloreriabuket/assets/img/carru5.jpg" alt="Ramo bohemio con tonos cálidos" loading="lazy" decoding="async">
+      </div>
+      <div class="carousel-slide">
+        <img src="/lafloreriabuket/assets/img/carru6.jpg" alt="Ramo campestre con follaje verde" loading="lazy" decoding="async">
+      </div>
+      <div class="carousel-slide">
+        <img src="/lafloreriabuket/assets/img/carru7.jpg" alt="Ramo romántico con rosas rosadas" loading="lazy" decoding="async">
+      </div>
+      <div class="carousel-slide">
+        <img src="/lafloreriabuket/assets/img/carru8.jpg" alt="Ramo tropical con flores exóticas" loading="lazy" decoding="async">
+      </div>
+      <div class="carousel-slide">
+        <img src="/lafloreriabuket/assets/img/carru9.jpg" alt="Ramo romántico con rosas rosadas" loading="lazy" decoding="async">
+      </div>
+      <div class="carousel-slide">
+        <img src="/lafloreriabuket/assets/img/carru10.jpg" alt="Ramo tropical con flores exóticas" loading="lazy" decoding="async">
+      </div>
+    </div>
+
+    <!-- Controles -->
+    <button class="carousel-btn prev" aria-label="Anterior" data-dir="-1">❮</button>
+    <button class="carousel-btn next" aria-label="Siguiente" data-dir="1">❯</button>
+
+    <!-- Indicadores -->
+    <div class="carousel-dots" role="tablist" aria-label="Paginación del carrusel">
+      <button class="dot" role="tab" aria-selected="true" aria-controls="slide-1" data-index="0"></button>
+      <button class="dot" role="tab" aria-selected="false" aria-controls="slide-2" data-index="1"></button>
+      <button class="dot" role="tab" aria-selected="false" aria-controls="slide-3" data-index="2"></button>
+      <button class="dot" role="tab" aria-selected="false" aria-controls="slide-4" data-index="3"></button>
+    </div>
+  </div>
+
+  <!-- Texto oculto para lectores de pantalla con el slide actual -->
+  <p class="sr-only" aria-live="polite"></p>
+</section>
+
+
+
 <!-- ===== Sección Contacto (moderna) ===== -->
 <section class="contact-modern" id="contact">
   <div class="contact-bg" aria-hidden="true"></div>
@@ -170,6 +236,8 @@
 
 
 <script src="/lafloreriabuket/assets/js/script.js"></script>
+<script src="/lafloreriabuket/assets/js/carrusel.js"></script>
+
 <!-- AOS JS -->
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
