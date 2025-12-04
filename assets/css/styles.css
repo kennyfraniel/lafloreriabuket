@@ -842,3 +842,191 @@ section, .hero, .intro, .photo-gallery, .location, .contact-modern {
 
 /* Si tu H1 gigante o el hero usan transform/posiciones raras, escondé rebalses */
 .hero, .intro { overflow: hidden; }
+
+
+
+
+
+
+
+/* footer */
+/* ===== Footer ===== */
+:root{
+  --footer-bg:#1c2b2d;
+  --footer-fg:#e7f0ec;
+  --footer-dim:#b7c6c0;
+  --footer-accent:#d6e5df; /* sutil, acorde a tu paleta */
+  --footer-card:#0f1b1c;
+}
+
+.site-footer{
+  position: relative;
+  background: var(--footer-bg);
+  color: var(--footer-fg);
+  padding-top: 28px;
+}
+
+/* barra luminosa superior */
+.footer-glow{
+  position: absolute; inset: 0 0 auto 0; height: 3px;
+  background: linear-gradient(90deg, rgba(214,229,223,.2), rgba(214,229,223,.9), rgba(214,229,223,.2));
+  filter: blur(.2px);
+}
+
+/* contenedor principal */
+.footer-inner{
+  display:grid;
+  grid-template-columns: 1.2fr .9fr 1.1fr;
+  gap: clamp(16px,3vw,28px);
+  max-width:1100px;
+  margin: 0 auto;
+  padding: clamp(28px,4vw,40px) clamp(16px,4vw,20px);
+}
+
+.footer-brand{
+  background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:16px;
+  padding:18px 18px 16px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.22);
+}
+.footer-title{
+  font-family: "Playfair Display", ui-serif, Georgia, serif;
+  letter-spacing:.5px;
+  font-size: clamp(22px,3.2vw,28px);
+  margin:0 0 6px;
+}
+.footer-subtitle{
+  margin:0; opacity:.9;
+  font-size: 14.5px;
+  color: var(--footer-dim);
+}
+
+/* navegación */
+.footer-nav{
+  display:flex; flex-direction:column; gap:10px;
+  align-self:start;
+  padding-top:6px;
+}
+.footer-nav a{
+  color: var(--footer-fg);
+  text-decoration:none;
+  opacity:.85;
+  font-size:15px;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.footer-nav a:hover{ opacity:1; transform: translateX(2px); }
+
+/* contacto & redes */
+.footer-contact{ display:flex; flex-direction:column; gap:12px; }
+.footer-cta{
+  display:inline-flex; align-items:center; gap:10px;
+  background: #ffffff;
+  color:#0f1414;
+  border-radius:14px;
+  padding:10px 14px;
+  text-decoration:none;
+  font-weight:600;
+  box-shadow:0 10px 24px rgba(0,0,0,.25);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.footer-cta:hover{ transform: translateY(-1px); box-shadow:0 12px 30px rgba(0,0,0,.28); }
+.footer-cta .icon{ font-size:18px; }
+
+.footer-social{ display:flex; gap:12px; flex-wrap:wrap; }
+.social-btn{
+  display:inline-flex; align-items:center; gap:8px;
+  color: var(--footer-fg);
+  text-decoration:none;
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  padding:8px 12px; border-radius:12px;
+  font-size:14px;
+  transition: background .2s ease, transform .2s ease, border-color .2s;
+}
+.social-btn:hover{
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.18);
+  transform: translateY(-1px);
+}
+
+/* línea inferior */
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.06);
+  margin-top:12px;
+  padding:14px 16px 24px;
+  display:flex; align-items:center; justify-content:center;
+  gap:12px; flex-wrap:wrap;
+  color: var(--footer-dim);
+  font-size: 14px;
+}
+.footer-legal{ display:flex; gap:10px; align-items:center; }
+.footer-legal a{ color: var(--footer-dim); text-decoration:none; }
+.footer-legal a:hover{ color: var(--footer-fg); }
+
+/* responsive */
+@media (max-width: 900px){
+  .footer-inner{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 640px){
+  .footer-inner{
+    grid-template-columns: 1fr;
+  }
+  .footer-brand{ order: -1; }
+  .footer-cta{ justify-content:center; }
+}
+/* ===== Ajuste botón WhatsApp en mobile ===== */
+@media (max-width: 640px) {
+  .footer-cta {
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+    width: fit-content;
+    margin: 0 auto; /* centrado */
+    background: rgba(255,255,255,0.06) !important;
+    color: var(--footer-fg) !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    font-weight: 400 !important;
+  }
+
+  .footer-cta .icon {
+    font-size: 16px !important;
+    opacity: 0.9;
+  }
+}
+@media (max-width: 640px) {
+  .social-btn {
+    font-size: 14px !important;
+    padding: 8px 12px !important;
+    border-radius: 12px !important;
+  }
+}
+/* ===== Alinear botones (WhatsApp + Instagram) uno abajo del otro ===== */
+@media (max-width: 640px) {
+
+  /* Contenedor de contacto completo */
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centra todo */
+    gap: 10px;
+    width: 100%;
+  }
+
+  /* Ambos botones compactos y del mismo ancho */
+  .footer-cta,
+  .social-btn {
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  /* Aseguramos que IG no se vaya a la izquierda */
+  .footer-social {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* centra Instagram */
+  }
+}
